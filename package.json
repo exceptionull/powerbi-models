@@ -64,8 +64,5 @@
   },
   "publishConfig": {
     "tag": "beta"
-  },
-  "dependencies": {
-    "jsen": "^0.6.1"
   }
 }

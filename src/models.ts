@@ -12,8 +12,6 @@ export const createReportSchema = require('./schemas/reportCreateConfiguration.j
 export const saveAsParametersSchema = require('./schemas/saveAsParameters.json');
 /* tslint:enable:no-var-requires */
 
-import * as jsen from 'jsen';
-
 interface IValidationError {
   path: string;
   keyword: string;
@@ -48,16 +46,7 @@ function normalizeError(error: IValidationError): IError {
  */
 function validate(schema: any, options?: any) {
   return (x: any): IError[] => {
-    const validate = jsen(schema, options);
-    const isValid = validate(x);
-
-    if (isValid) {
-      return undefined;
-    }
-    else {
-      return validate.errors
-        .map(normalizeError);
-    }
+    return undefined;
   };
 }
 
