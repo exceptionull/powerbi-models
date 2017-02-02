@@ -29,18 +29,6 @@ export interface IError {
   technicalDetails?: ITechnicalDetails;
 }
 
-function normalizeError(error: IValidationError): IError {
-  let message = error.message;
-
-  if (!message) {
-    message = `${error.path} is invalid. Not meeting ${error.keyword} constraint`;
-  }
-
-  return {
-    message
-  };
-}
-
 /**
  * Takes in schema and returns function which can be used to validate the schema with better semantics around exposing errors
  */
