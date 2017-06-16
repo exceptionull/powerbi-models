@@ -41,6 +41,7 @@ function validate(schema: any, options?: any) {
 export interface ISettings {
   filterPaneEnabled?: boolean;
   navContentPaneEnabled?: boolean;
+  useCustomSaveAsDialog?: boolean;
 }
 
 export const validateSettings = validate(settingsSchema, {
@@ -58,6 +59,7 @@ export interface IReportLoadConfiguration {
   filters?: (IBasicFilter | IAdvancedFilter)[];
   permissions?: Permissions;
   viewMode?: ViewMode;
+  tokenType?: TokenType;
 }
 
 export const validateReportLoad = validate(loadSchema, {
@@ -72,6 +74,7 @@ export interface IReportCreateConfiguration {
    accessToken: string;
    datasetId: string;
    settings?: ISettings;
+   tokenType?: TokenType;
  }
 
 export const validateCreateReport = validate(createReportSchema);
@@ -82,6 +85,7 @@ export interface IDashboardLoadConfiguration {
     accessToken: string;
     id: string;
     pageView?: PageView;
+    tokenType?: TokenType;
 }
 
 export const validateDashboardLoad = validate(dashboardLoadSchema);
@@ -388,12 +392,12 @@ export interface IEqualsDataReference extends IDataReference {
 }
 
 export interface IBetweenDataReference extends IDataReference {
-  between: (string | boolean | number | Date)[];
-  formattedValue: string;
+  between: (string | boolean | number)[];
 }
 
 export interface IValueDataReference extends IDataReference {
-  value: string | boolean | number;
+  value: string | boolean | number | Date;
+  formattedValue: string;
 }
 
 export interface IIdentityValue<T extends IDataReference> {
@@ -421,6 +425,11 @@ export enum Permissions {
 export enum ViewMode {
   View,
   Edit
+}
+
+export enum TokenType {
+  Aad,
+  Embed
 }
 
 export interface ISaveAsParameters {
